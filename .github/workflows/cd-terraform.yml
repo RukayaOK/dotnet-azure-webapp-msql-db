@@ -27,16 +27,6 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@main
         id: setup
-
-      - name: Terraform Init 
-        id: init
-        run: |
-          make terra-init
-          
-      - name: Terraform Plan
-        id: plan
-        run: |
-          make terra-plan
           
       - name: Terraform Apply
         id: apply
