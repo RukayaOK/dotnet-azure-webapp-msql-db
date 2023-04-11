@@ -20,9 +20,6 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
-      
-      - name: Install Dependencies
-        run: apt install make
 
       - name: Setup Azure
         run:  pip3 install --no-cache-dir -U azure-cli==2.43.0
