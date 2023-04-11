@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
 
 env:
+  RUNTIME_ENVIRONMENT: local
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
