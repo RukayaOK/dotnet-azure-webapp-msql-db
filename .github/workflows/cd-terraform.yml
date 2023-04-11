@@ -15,9 +15,6 @@ jobs:
   terra-apply:
     name: CD Terraform
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ vars.WORKING_DIRECTORY }}
 
     steps:
       - name: Check out code
@@ -32,7 +29,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@main
         id: setup
-        
+
       - name: Terraform Init 
         id: init
         run: |

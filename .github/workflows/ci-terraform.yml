@@ -15,9 +15,6 @@ jobs:
   tflint-tfplan:
     name: CI Terraform
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ vars.WORKING_DIRECTORY }}
 
     steps:
       - name: Check out code
