@@ -66,6 +66,12 @@ jobs:
         with:
           creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.ARM_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
       
+      - name: App Service Settings
+        uses: azure/appservice-settings@v1
+        with:
+          app-name: ${{ vars.APP_NAME }}
+          app-settings-json: '${{ secrets.APP_SECRETS }}' 
+
       - uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ vars.APP_NAME }}
