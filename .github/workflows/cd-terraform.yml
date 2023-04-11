@@ -1,0 +1,51 @@
+name: CD Terraform
+
+on:
+  workflow_dispatch:
+
+env:
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  TF_VAR_administrator_login: ${{ secrets.TF_VAR_administrator_login }}
+  TF_VAR_administrator_login_password: ${{ secrets.TF_VAR_administrator_login_password }}
+
+jobs:
+  terra-apply:
+    name: CD Terraform
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ vars.WORKING_DIRECTORY }}
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      
+      - name: Install Dependencies
+        run: apt install make
+
+      - name: Setup Azure
+        run:  pip3 install --no-cache-dir -U azure-cli==2.43.0
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@main
+        id: setup
+        
+      - name: Terraform Init 
+        id: init
+        run: |
+          make terra-init
+          
+      - name: Terraform Plan
+        id: plan
+        run: |
+          make terra-plan
+          
+      - name: Terraform Apply
+        id: apply
+        run: |
+          make terra-apply
+      
+      

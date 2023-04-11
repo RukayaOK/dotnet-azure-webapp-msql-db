@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+
+  test-app-terraform:
+    image: 'testappterraform:latest'
+    container_name: test-app-terraform
+    build:
+      context: ../../
+      dockerfile: terraform/docker/Dockerfile
+      target: azure
+    stdin_open: true
+    tty: true
+    #working_dir: /infrastructure
+    environment:
+      - ARM_SUBSCRIPTION_ID
+      - ARM_TENANT_ID
+      - ARM_CLIENT_ID
+      - ARM_CLIENT_SECRET
+      - TF_VAR_administrator_login
+      - TF_VAR_administrator_login_password
+
+  

@@ -1,0 +1,59 @@
+name: CI Terraform
+
+on:
+  workflow_dispatch:
+
+env:
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  TF_VAR_administrator_login: ${{ secrets.TF_VAR_administrator_login }}
+  TF_VAR_administrator_login_password: ${{ secrets.TF_VAR_administrator_login_password }}
+
+jobs:
+  tflint-tfplan:
+    name: CI Terraform
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ vars.WORKING_DIRECTORY }}
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      
+      - name: Install Dependencies
+        run: apt install make
+         
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@main
+        id: setup
+      
+      - uses: terraform-linters/setup-tflint@v3
+        name: Setup TFLint
+        with:
+          tflint_version: v0.44.1
+      
+      #- name: Setup Checkov in Python Container
+      #  run: pip3 install --no-cache-dir install checkov==2.3.92
+
+      - name: Terraform Init 
+        id: init
+        run: |
+          make terra-init
+      
+      - name: Terraform Lint 
+        id: lint
+        run: |
+          make terra-lint
+          
+      - name: Terraform Plan
+        id: plan
+        run: |
+          make terra-plan
+      
+      #- name: Terraform Security
+      #  id: security
+      #  run: |
+      #    make terra-sec

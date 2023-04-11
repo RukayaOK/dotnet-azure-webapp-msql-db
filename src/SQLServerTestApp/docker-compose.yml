@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  sqlservertestapp:
+    image: ${DOCKER_REGISTRY-}sqlservertestapp
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - DOTNET_ENVIRONMENT
+      - TZ=Europe/London
+    volumes:
+      - ${HOME}/.microsoft/usersecrets:/home/appuser/.microsoft/usersecrets:ro
+
