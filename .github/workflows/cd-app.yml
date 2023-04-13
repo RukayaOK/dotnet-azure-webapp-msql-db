@@ -35,4 +35,36 @@ jobs:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
 
-  
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    defaults:
+      run:
+        working-directory: src/SQLServerTestApp
+    
+    steps:
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.ARM_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
+      
+      - name: App Service Settings
+        uses: azure/appservice-settings@v1
+        with:
+          app-name: ${{ vars.APP_NAME }}
+          app-settings-json: '${{ secrets.APP_SECRETS }}' 
+      
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: .net-app
+      
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ vars.APP_NAME }}
+          package: .
+    
+
+      
+    
