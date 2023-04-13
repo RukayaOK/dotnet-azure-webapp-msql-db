@@ -52,6 +52,9 @@ app_minimum_tls_version = "1.2"
 app_identity_type       = "SystemAssigned"
 
 ##### APP INSIGHTS #####
+app_diagnostic_setting_name  = "AppDiagnosticSettings"
+log_analytics_log_categories = ["AppServiceHTTPLogs", "AppServiceConsoleLogs", "AppServiceAppLogs", "AppServiceAuditLogs", "AppServiceIPSecAuditLogs", "AppServicePlatformLogs"]
+
 log_analytics_workspace_name              = "Central-LAW"
 log_analytics_workspace_sku               = "PerGB2018"
 log_analytics_workspace_retention_in_days = 30

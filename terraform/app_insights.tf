@@ -20,3 +20,30 @@ resource "azurerm_application_insights_smart_detection_rule" "rule" {
   application_insights_id = azurerm_application_insights.main.id
   enabled                 = true
 }
+
+resource "azurerm_monitor_diagnostic_setting" "main" {
+  name                       = var.app_diagnostic_setting_name
+  target_resource_id         = azurerm_windows_web_app.main.id
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
+
+  dynamic "log" {
+    iterator = entry
+    for_each = var.log_analytics_log_categories
+    content {
+      category = entry.value
+      enabled  = true
+
+      retention_policy {
+        enabled = false
+      }
+    }
+  }
+  metric {
+    category = "AllMetrics"
+
+    retention_policy {
+      enabled = false
+      days    = 30
+    }
+  }
+}

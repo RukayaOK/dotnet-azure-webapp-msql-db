@@ -190,3 +190,13 @@ variable "app_insights_application_type" {
   type        = string
   description = "description"
 }
+
+variable "app_diagnostic_setting_name" {
+  type        = string
+  description = "description"
+}
+
+variable "log_analytics_log_categories" {
+  type        = list(string)
+  description = "description"
+}
