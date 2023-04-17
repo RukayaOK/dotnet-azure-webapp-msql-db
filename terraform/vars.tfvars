@@ -18,6 +18,7 @@ private_endpoint_nsg_name             = "private-endpoint-nsg"
 private_endpoint_subnet_name          = "private-endpoint-subnet"
 private_endpoint_subnet_address_space = ["10.7.0.24/29"]
 
+private_dns_link_name = "test-app-vnet-link"
 ##### DATABASE #####
 license_type       = "BasePrice"
 sku_name           = "S0" #"GP_Gen5"

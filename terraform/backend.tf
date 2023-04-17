@@ -1,8 +1,8 @@
 terraform {
   backend "azurerm" {
-    resource_group_name  = "dotnet-test-rg"
-    storage_account_name = "dotnettestsa468"
-    container_name       = "tfstatecont"
+    resource_group_name  = "terra-rg"
+    storage_account_name = "somesa1235"
+    container_name       = "conttera1235"
     key                  = "tfstate"
   }
 }

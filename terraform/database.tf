@@ -31,4 +31,11 @@ resource "azurerm_private_endpoint" "database_private_endpoint" {
     private_connection_resource_id = module.azuresql.azuresql_server.id
     subresource_names              = ["sqlServer"]
   }
+
+  private_dns_zone_group {
+    name = var.database_private_endpoint_name
+    private_dns_zone_ids = [
+      azurerm_private_dns_zone.main.id
+    ]
+  }
 }

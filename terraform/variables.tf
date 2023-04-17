@@ -65,6 +65,11 @@ variable "private_endpoint_subnet_address_space" {
   description = "description"
 }
 
+variable "private_dns_link_name" {
+  type        = string
+  description = "description"
+}
+
 ##### DATABASE #####
 variable "server_version" {
   type        = string
