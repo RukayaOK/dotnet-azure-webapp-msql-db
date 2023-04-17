@@ -11,13 +11,18 @@ resource "azurerm_windows_web_app" "main" {
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_service_plan.main.location
   service_plan_id     = azurerm_service_plan.main.id
-
+  app_settings        = merge(local.app_settings, var.app_settings)
   site_config {
+    minimum_tls_version = var.app_minimum_tls_version
     application_stack {
       current_stack  = "dotnet"
       dotnet_version = "v6.0"
     }
   }
+  identity {
+    type = var.app_identity_type
+  }
+
 
 }
 

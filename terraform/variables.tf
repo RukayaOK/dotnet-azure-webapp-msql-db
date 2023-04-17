@@ -155,10 +155,10 @@ variable "app_minimum_tls_version" {
   description = "description"
 }
 
-variable "app_dotnet_version" {
-  type        = string
-  description = "description"
-}
+# variable "app_dotnet_version" {
+#   type        = string
+#   description = "description"
+# }
 
 variable "app_identity_type" {
   type        = string
