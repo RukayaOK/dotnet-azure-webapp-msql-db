@@ -39,3 +39,11 @@ resource "azurerm_private_endpoint" "database_private_endpoint" {
     ]
   }
 }
+
+resource "azurerm_sql_active_directory_administrator" "example" {
+  server_name         = module.azuresql.azuresql_server.name
+  resource_group_name = azurerm_resource_group.main.name
+  login               = "sqladmin"
+  tenant_id           = data.azurerm_client_config.current.tenant_id
+  object_id           = "30e1ec8f-88a4-4c4d-91d4-91809fe93482" #"${data.azurerm_client_config.current.object_id}"
+}

@@ -35,8 +35,8 @@ database_license_type = "LicenseIncluded"
 firewall_rules = {
   MY_IP1 = {
     name             = "MY_IP1"
-    start_ip_address = "77.108.144.130"
-    end_ip_address   = "77.108.144.130"
+    start_ip_address = "86.3.69.12"
+    end_ip_address   = "86.3.69.12"
   }
 }
 
@@ -62,3 +62,30 @@ log_analytics_workspace_retention_in_days = 30
 
 app_insights_name             = "appInsights"
 app_insights_application_type = "other"
+
+app_permitted_inbound_ips = [
+  {
+    "ipAddress" : "8.8.8.8/32",
+    "action" : "Deny",
+    "tag" : "Default",
+    "priority" : 100,
+    "name" : "DenyRule1",
+    "description" : ""
+  },
+  {
+    "ipAddress" : "8.8.8.9/32",
+    "action" : "Deny",
+    "tag" : "Default",
+    "priority" : 150,
+    "name" : "DenyRule2",
+    "description" : ""
+  },
+  {
+    "ipAddress" : "86.3.69.12/32",
+    "action" : "Allow",
+    "tag" : "Default",
+    "priority" : 200,
+    "name" : "AllowRule1",
+    "description" : ""
+  }
+]

@@ -24,6 +24,8 @@ namespace SQLServerTestApp
                     await context.Response.WriteAsync("Hello World!");
                 });
             });
+
+            app.UseFileServer();
         }
     }
 }

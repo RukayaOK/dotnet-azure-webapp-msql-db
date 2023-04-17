@@ -170,6 +170,10 @@ variable "app_identity_type" {
   description = "description"
 }
 
+variable "app_permitted_inbound_ips" {
+  type        = list(any)
+  description = "description"
+}
 ##### APP INSIGHTS #####
 variable "log_analytics_workspace_name" {
   type        = string
