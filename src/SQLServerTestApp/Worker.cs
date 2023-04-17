@@ -73,7 +73,7 @@ public class Worker : BackgroundService
                 //display error message
                 Console.WriteLine("Exception: " + ex.Message);
             }
-            await Task.Delay(6000, stoppingToken);
+            await Task.Delay(60000, stoppingToken);
         }
     }
 }
